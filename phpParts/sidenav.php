@@ -47,6 +47,21 @@ $filenameLink = basename($_SERVER['PHP_SELF']);
                 <span class="nav-link-text">Home</span>
               </a>
             </li>
+            
+            <?if($session_role=="admin"){?>
+            <li class="nav-item">
+              <a class="nav-link <?if($filenameLink=='users.php'){echo 'active';}?>" href="./users.php">
+                <span class="nav-link-text">Users</span>
+              </a>
+            </li>
+            <?}?>
+            <?if($session_role=="admin" || $session_role=="approver"){?>
+            <li class="nav-item">
+              <a class="nav-link <?if($filenameLink=='posts.php'){echo 'active';}?>" href="./posts.php">
+                <span class="nav-link-text">Posts</span>
+              </a>
+            </li>
+            <?}?>
            
             <!--<li class="nav-item">-->
             <!--  <a class="nav-link <?if($filenameLink=='settings.php'){echo 'active';}?>" href="./settings.php">-->

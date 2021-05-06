@@ -235,3 +235,58 @@
 [04-May-2021 07:40:32 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
 [04-May-2021 07:44:48 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
 [04-May-2021 08:12:30 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[05-May-2021 20:04:04 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[05-May-2021 20:18:21 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:26:12 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:29:28 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:29:29 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:30:25 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:30:38 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:30:40 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:30:43 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:30:56 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:31:03 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:31:26 UTC] PHP Warning:  mysqli::query(): Empty query in /home2/anomozco/projects.anomoz.com/gpxCollaborate/global.php on line 17
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'admin' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'G9HXOD43R2' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'PZPUCFJG0G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'admin' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'G9HXOD43R2' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'F04SER6YW6' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'PZPUCFJG0G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'DXN3E1YYT5' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'ZVTI87C634' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'Z8UW1T874G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:37:37 UTC] PHP Warning:  Illegal string offset 'JCMRS1WO4Q' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'admin' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'G9HXOD43R2' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'PZPUCFJG0G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'admin' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'G9HXOD43R2' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'F04SER6YW6' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'PZPUCFJG0G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'DXN3E1YYT5' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'ZVTI87C634' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'Z8UW1T874G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:38:57 UTC] PHP Warning:  Illegal string offset 'JCMRS1WO4Q' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'admin' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'G9HXOD43R2' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'PZPUCFJG0G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 144
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'admin' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'G9HXOD43R2' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'F04SER6YW6' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'PZPUCFJG0G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'DXN3E1YYT5' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'ZVTI87C634' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'Z8UW1T874G' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:00 UTC] PHP Warning:  Illegal string offset 'JCMRS1WO4Q' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 198
+[06-May-2021 06:39:04 UTC] PHP Warning:  Illegal string offset 'admin' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 165
+[06-May-2021 06:39:04 UTC] PHP Warning:  Illegal string offset '116861738564589036249' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 165
+[06-May-2021 06:39:04 UTC] PHP Warning:  Illegal string offset 'U1G6WF8KFT' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 165
+[06-May-2021 06:39:04 UTC] PHP Warning:  Illegal string offset 'PS3GMGYSU4' in /home2/anomozco/projects.anomoz.com/gpxCollaborate/users.php on line 165
+[06-May-2021 06:50:11 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home2/anomozco/projects.anomoz.com/gpxCollaborate/home.php on line 176
+[06-May-2021 06:50:31 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home2/anomozco/projects.anomoz.com/gpxCollaborate/home.php on line 204
+[06-May-2021 06:50:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home2/anomozco/projects.anomoz.com/gpxCollaborate/home.php on line 205
+[06-May-2021 06:51:36 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home2/anomozco/projects.anomoz.com/gpxCollaborate/home.php on line 210
+[06-May-2021 07:50:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home2/anomozco/projects.anomoz.com/gpxCollaborate/test.php on line 67
+[06-May-2021 07:56:00 UTC] PHP Parse error:  syntax error, unexpected end of file in /home2/anomozco/projects.anomoz.com/gpxCollaborate/post.php on line 172

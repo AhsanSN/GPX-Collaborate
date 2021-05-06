@@ -19,6 +19,78 @@ if(isset($_GET['logout'])){
 }
 
 
+if (isset($_POST['username'])) {
+
+    $allow        = 1;
+    $new_username = $_POST['username'];
+    $new_email    = $_POST["email"];
+    $new_password = $_POST["password"];
+    $new_ip       = $_SERVER['REMOTE_ADDR'];
+    
+    $email_query = "SELECT email FROM gpxCollaborate_users Where email='$new_email'";
+    $result      = $con->query($email_query);
+    if ($result->num_rows > 0) {
+        $allow = 0;
+        //already user
+        if (isset($_POST['pic'])) {
+            $new_usernumber = $_POST['usernumber'];
+            
+            $email_query = "SELECT * FROM gpxCollaborate_users Where email='$new_email' AND usernumber = '$new_usernumber'";
+            $result      = $con->query($email_query);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $_SESSION['usernumber'] = $row['usernumber'];
+                    $_SESSION['email']      = $row['email'];
+                    $_SESSION['password']      = $row['password'];
+
+                    $session_usernumber = $_SESSION['usernumber'];
+                    $session_username   = $_SESSION['username'];
+                    $session_email      = $_SESSION['email'];
+                    $session_pic        = $_SESSION['pic'];
+                    $session_swkey        = $_SESSION['swkey'];
+                    
+
+?><script type="text/javascript"> 
+        console.log("r1");
+        window.location = "./"; </script>
+    <?
+                    
+                }
+            }
+        }
+          
+    }
+    
+    if ($allow == 1) {
+       
+            $new_usernumber = $_POST['usernumber'];
+            $new_username = $_POST['username'];
+            $new_pic = $_POST['pic'];
+            
+            $sql            = "INSERT INTO gpxCollaborate_users(id,name, email, password,usernumber, role, timeAdded) VALUES ('$new_usernumber','$new_username', '$new_email', '', '$new_usernumber', 'user', '$timeAdded')";
+            if (!mysqli_query($con, $sql)) {
+                echo "account notcreated";
+            } else {
+                $_SESSION['usernumber'] = $new_usernumber;
+                $_SESSION['username']   = $new_username;
+                $_SESSION['email']      = $new_email;
+                $_SESSION['pic']        = $_POST['pic'];
+                
+                $session_usernumber = $_SESSION['usernumber'];
+                $session_username   = $_SESSION['username'];
+                $session_pic        = $_SESSION['pic'];
+                $session_email      = $_SESSION['email'];
+                
+                
+?><script type="text/javascript"> window.location = "./"; </script>
+    <?
+            }
+        
+        
+    }
+}
+
+
 if(isset($_POST['name'])){
     $name = mb_htmlentities(($_POST['name']));
     $email = mb_htmlentities(($_POST['email']));
@@ -208,7 +280,15 @@ Thank you.
                
                 
                 <div class="text-center">
-                  <input type="submit" class="btn btn-primary mt-4" value="Signup">
+                  <input type="submit" class="btn btn-primary mt-4 btn-block" value="Signup">
+                  <hr>
+                  <div id="gSignInWrapper" style="width:100%;">
+                        <div id="customBtn" class=" btn-block btn btn-primary  btn-md " style="background: #206dfb !important;">
+                            <span class="label">Signin with Google</span>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
                  <div class="text-center">
                 </div>
@@ -234,6 +314,54 @@ Thank you.
   
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <script src="//geodata.solutions/includes/countrystatecity.js"></script>
+  
+  
+  
+     
+<script src="https://apis.google.com/js/api:client.js"></script>
+  <script>
+  
+  var googleUser = {};
+  var startApp = function() {
+    gapi.load('auth2', function(){
+      auth2 = gapi.auth2.init({
+        client_id: '140850185426-ord0lcee7nqb0cf44s65ijunde5840mp.apps.googleusercontent.com',
+      });
+      attachSignin(document.getElementById('customBtn'));
+    });
+  };
+
+  function attachSignin(element) {
+    auth2.attachClickHandler(element, {},
+        function(googleUser) {
+          var name= googleUser.getBasicProfile().getName();
+        var id = googleUser.getBasicProfile().getId();
+         var email = googleUser.getBasicProfile().getEmail();
+              var pic = googleUser.getBasicProfile().getImageUrl();
+              if(id!='')
+              {
+                  document.getElementById("google_data").elements[0].value = id;
+                  document.getElementById("google_data").elements[1].value = name;
+                  document.getElementById("google_data").elements[2].value = email;
+                  document.getElementById("google_data").elements[3].value = pic;
+                  document.getElementById('google_data').submit();
+              }
+        }, function(error) {
+        });
+  }
+  </script>
+
+
+<form id="google_data" action="signup.php" method="post">
+            <input type="text" hidden name="usernumber" value="">
+            <input type="text" hidden name="username" value="">
+            <input type="email" hidden name="email" value="">
+            <input type="text" hidden name="pic" value="">
+            <button type="submit" hidden></button>
+            </form>
+      <script>startApp();</script>
+  
+  
   
 </body>
 

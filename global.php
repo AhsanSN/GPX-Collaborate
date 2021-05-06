@@ -42,6 +42,27 @@ else
 }
 
 
+if(isset($_SESSION['usernumber'])){
+    $usernumber = $_SESSION['usernumber'];
+    $sq     = "SELECT * from gpxCollaborate_users where usernumber = '$usernumber'  ";
+        $result = $con->query($sq);
+        $num    = mysqli_num_rows($result);
+        
+        if ($num == 1) {
+        	$logged = 1;
+    	    	while ($row = $result->fetch_assoc()) {
+    	    		$_SESSION['id'] = $row['id'];
+    	    		$session_name = $row['name'];
+    	            $session_email = $email;
+    	            $session_userId = $row['id'];
+    	            $session_role = $row['role'];
+    	    }
+        }
+}
+
+
+
+
 function mb_htmlentities($string, $hex = true, $encoding = 'UTF-8') {
     global $con;
     return mysqli_real_escape_string($con, $string);
