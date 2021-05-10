@@ -9,82 +9,6 @@ if($logged==0){
 } 
 
 
-if(isset($_POST['title'])){
-    $title = mb_htmlentities(($_POST['title']));
-    $route = mb_htmlentities(($_POST['route']));
-    $description = mb_htmlentities(($_POST['description']));
-    $price = mb_htmlentities(($_POST['price']));
-    $userId= $session_userId;
-
-    
-    if(isset($_FILES["files"])){
-        
-        //echo "asd";
-        $myfiles = array();
-        $extension=array("jpeg","jpg","png","gif");
-        foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name) {
-            $txtGalleryName = generateRandomString();
-            $file_name=$_FILES["files"]["name"][$key];
-            $file_tmp=$_FILES["files"]["tmp_name"][$key];
-            $ext=pathinfo($file_name,PATHINFO_EXTENSION);
-        
-            if(true) {
-                if(!file_exists("./uploads/".$file_name)) {
-                   
-                    $filename=basename($file_name,$ext);
-                    $newFileName=$filename.time().".".$ext;
-                    move_uploaded_file($file_tmp=$_FILES["files"]["tmp_name"][$key],"./uploads/".$newFileName);
-                    
-                    //var_dump($a);
-                }
-                else {
-                    $filename=basename($file_name,$ext);
-                    $newFileName=$filename.time().".".$ext;
-                    move_uploaded_file($file_tmp=$_FILES["files"]["tmp_name"][$key],"./uploads/".$newFileName);
-                }
-                
-                array_push($myfiles, $newFileName);
-            }
-            else {
-                array_push($error,"$file_name, ");
-            }
-        }
-        
-        $logo=json_encode($myfiles, true);
-        
-        }
-     
-    $timeAdded = time();
-    $id = generateRandomString();
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        $sql="update gpxCollaborate_posts set title='$title', description='$description', timeAdded='$timeAdded', userId='$session_userId', id='$id', status='new', type='$route' ";
-    }else{
-        $sql="insert into gpxCollaborate_posts set title='$title', description='$description', timeAdded='$timeAdded', userId='$session_userId', id='$id', status='new', type='$route' ";
-    }
-    //echo $sql;
-    if(!mysqli_query($con,$sql))
-    {
-        echo "err";
-        
-    }else{
-        if(count($myfiles)>0){
-		    $stmt = $con->prepare("UPDATE gpxCollaborate_posts set file='$logo' where id='$id';");
-		    if( $stmt->execute()){
-		        $stmt->close();
-		    }
-		}
-		
-		?>
-    <script type="text/javascript">
-            window.location = "./home.php?m=Your post was created and is awaiting approval.";
-        </script>
-    <?
-    
-		
-    }
-    
-}
 
 
 
@@ -144,9 +68,37 @@ if(isset($_POST['title'])){
         
     <div class="row">
     <div class="col-md-9">
-        <div class="alert alert-info" role="alert">
-                <strong>Posts will show here in the next sprint.</strong>
+       
+       <div class="row">
+       <? $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve'"; 
+        $result_quizQuestions = $con->query($query_quizQuestions);
+        while($row = $result_quizQuestions->fetch_assoc()) 
+        {
+            foreach(json_decode($row['file'], true) as $fileorg){
+                $file = strtolower($fileorg);
+                $ext = end(explode('.', $file));
+                if($ext=="gpx"){
+                    $image = $row['image'];
+                }else{
+                    $image = "./uploads/".json_decode($row['file'], true)[0];
+                }
+            }
+        ?>
+        
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="<?echo $image?>" alt="<?echo $image?>">
+                  <div class="card-body">
+                    <h5 class="card-title"><?echo $row['title']?></h5>
+                    <p class="card-text"><?echo $row['description']?></p>
+                    <a href="./post.php?id=<?echo $row['id']?>" class="btn btn-primary">View</a>
+                  </div>
+                </div>
             </div>
+
+         <?}?>
+        </div>
+       
     </div>
       <div class="col-md-3">
           

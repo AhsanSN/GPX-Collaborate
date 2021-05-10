@@ -10,7 +10,7 @@ if($session_userId!="admin" && $session_userId!="approver"){
 
 if(isset($_GET['change-status'])){
     $id = $_GET['change-status'];
-    $role = $_GET['status'];
+    $role = $_GET['role'];
     if($id!="admin"){
         $sql="update gpxCollaborate_posts set status='$role' where id='$id'";
         if(!mysqli_query($con,$sql))

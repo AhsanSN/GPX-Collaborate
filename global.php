@@ -134,6 +134,8 @@ function sendEmailNotification($subject, $message, $email){
         
 }
 
+$g_project_url = "https://projects.anomoz.com/gpxCollaborate/";
+
 $g_project_name = "GPX Collaborate";
 $g_main_admin_id = "admin";
 

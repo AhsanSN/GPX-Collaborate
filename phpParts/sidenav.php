@@ -47,6 +47,11 @@ $filenameLink = basename($_SERVER['PHP_SELF']);
                 <span class="nav-link-text">Home</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link <?if($filenameLink=='newpost.php'){echo 'active';}?>" href="./newpost.php">
+                <span class="nav-link-text">New Post</span>
+              </a>
+            </li>
             
             <?if($session_role=="admin"){?>
             <li class="nav-item">
