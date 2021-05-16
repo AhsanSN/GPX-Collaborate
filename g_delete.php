@@ -1,4 +1,4 @@
-<?
+<?php 
 include_once("./global.php");
 
 $table = $_GET['t'];
@@ -16,9 +16,9 @@ $sql="delete from $table where $id='$id_value' ";
     }else{
     ?>
     <script type="text/javascript">
-        window.location = "<?echo $callback;?>";
+        window.location = "<?php echo $callback;?>";
     </script>
-    <?
+    <?php 
 }
 
     

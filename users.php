@@ -1,11 +1,11 @@
-<?include_once("./global.php");
+<?php include_once("./global.php");
 
 if($session_userId!="admin"){
     ?>
     <script type="text/javascript">
             window.location = "./";
         </script>
-    <?
+    <?php 
 } 
 
 if(isset($_GET['change-user'])){
@@ -36,13 +36,13 @@ if(isset($_GET['delete-user'])){
 <html>
 
 <head>
-  <?include_once("./phpParts/header.php")?>
+  <?php include_once("./phpParts/header.php")?>
   
 </head>
 
 <body>
   <!-- Sidenav -->
-  <?
+  <?php 
  
     include_once("./phpParts/sidenav.php");
 
@@ -50,7 +50,7 @@ if(isset($_GET['delete-user'])){
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <?include_once("./phpParts/topnav.php")?>
+    <?php include_once("./phpParts/topnav.php")?>
     <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -70,11 +70,11 @@ if(isset($_GET['delete-user'])){
           </div>
           
         
-                  <?if(isset($_GET['delete-user'])){?>
+                  <?php if(isset($_GET['delete-user'])){?>
               <div class="alert alert-success" role="alert">
                 <strong>User deleted successfully</strong>
             </div>
-            <?}?>
+            <?php }?>
             
             
         </div>
@@ -110,7 +110,7 @@ if(isset($_GET['delete-user'])){
         </thead>
         <tbody>
             
-           <?     
+           <?php      
         
                 
            $query_quizQuestions= "select * from gpxCollaborate_users"; 
@@ -126,14 +126,14 @@ if(isset($_GET['delete-user'])){
                 ?>
               <tr>
                 <td>
-                    <?echo $row['name']?>
+                    <?php echo $row['name']?>
                 </td>
                 
                 <td>
-                    <?echo $row['email']?>
+                    <?php echo $row['email']?>
                 </td>
                 <td>
-                    <?echo ucfirst($row['role'])?>
+                    <?php echo ucfirst($row['role'])?>
                 </td>
                
                 
@@ -141,12 +141,12 @@ if(isset($_GET['delete-user'])){
                     <div class="media align-items-center">
                         <div class="media-body">
                             
-                            <?if($row['role']=="user"){?>
-                                <a class="btn btn-success btn-md" href="?change-user=<?echo $row['id']?>&role=approver">Make Approver</a>
-                            <?}else if($row['role']=="approver"){?>
-                                <a class="btn btn-warning btn-md" href="?change-user=<?echo $row['id']?>&role=user">Make User</a>
-                            <?}?>
-                            <a class="btn btn-danger btn-md" href="?delete-user=<?echo $row['id']?>">Delete</a>
+                            <?php if($row['role']=="user"){?>
+                                <a class="btn btn-success btn-md" href="?change-user=<?php echo $row['id']?>&role=approver">Make Approver</a>
+                            <?php }else if($row['role']=="approver"){?>
+                                <a class="btn btn-warning btn-md" href="?change-user=<?php echo $row['id']?>&role=user">Make User</a>
+                            <?php }?>
+                            <a class="btn btn-danger btn-md" href="?delete-user=<?php echo $row['id']?>">Delete</a>
 
                             
                           
@@ -156,7 +156,7 @@ if(isset($_GET['delete-user'])){
                 </td>
               
               </tr>
-              <?}
+              <?php }
               }?>
         </tbody>
       </table>
@@ -168,11 +168,11 @@ if(isset($_GET['delete-user'])){
 
     
       <!-- Footer -->
-      <?include_once("./phpParts/footer.php")?>
+      <?php include_once("./phpParts/footer.php")?>
     </div>
   </div>
   <!-- Scripts -->
-  <?include_once("./phpParts/footer-scripts.php")?>
+  <?php include_once("./phpParts/footer-scripts.php")?>
 
   
 </body>

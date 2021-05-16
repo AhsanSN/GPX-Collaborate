@@ -1,22 +1,40 @@
-<!--https://v2.convertapi.com/convert/web/to/png?Url=&StoreFile=true-->
-
-
-<?
-$url = "https://projects.anomoz.com/gpxCollaborate/gfx_to_png.php?filename=W6LOCRNZN2";
-
-$urlPing = "https://www.api.anomoz.com/api/anomoz/url_to_png.php?url=".urlencode($url)."&ViewportWidth=850";
-$ch = curl_init();
-
-curl_setopt($ch, CURLOPT_URL, $urlPing);
-curl_setopt($ch, CURLOPT_HEADER, 0);
-
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET"); 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-
-$return = curl_exec($ch);
-
-$url = $return;
-
+<?php include_once("./global.php");
+// $gpxfile = $_GET['filename'];
+// $gpxfile = "test1.gpx";
+$gpxfile = "J2ZVY6J7GU_merged.gpx";
 ?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		    body {
+	margin: 0;
+}
+html, body, #leaflet {
+	height: 100%
+}
+		</style>
+		<link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+		<script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.4.0/gpx.min.js"></script>
+	</head>
+	<body>
+<div id="leaflet"></div>
+	
+	<!--<div id="leaflet"></div>-->
+
+		
+		<script>
+		    var map = new L.Map('leaflet', {layers: [new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')]});
+
+            var gpx = './uploads/<?php echo $gpxfile?>'; // URL to your GPX file or the GPX itself
+            new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+            	map.fitBounds(e.target.getBounds());
+            }).addTo(map);
+            
+           
+
+
+		</script>
+	</body>
+</html>

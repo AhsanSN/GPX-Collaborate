@@ -1,4 +1,4 @@
-<?
+<?php 
 include_once("./global.php");
 
 if(isset($_FILES["fileToUpload"])){
@@ -51,17 +51,17 @@ if(isset($_FILES["fileToUpload"])){
 <html>
 
 <head>
-  <?include_once("./phpParts/header.php")?>
+  <?php include_once("./phpParts/header.php")?>
 </head>
 
 <body>
    
   <!-- Sidenav -->
-  <?include_once("./phpParts/sidenav.php")?>
+  <?php include_once("./phpParts/sidenav.php")?>
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <?include_once("./phpParts/topnav.php")?>
+    <?php include_once("./phpParts/topnav.php")?>
     <!-- Header -->
     <!-- Header -->
     <form method="post" action="" enctype="multipart/form-data">
@@ -73,11 +73,11 @@ if(isset($_FILES["fileToUpload"])){
               <h6 class="h2 text-white d-inline-block mb-0">Upload file</h6>
               
             </div>
-            <?if($session_role=="admin" || $session_role=="teacher"){?>
+            <?php if($session_role=="admin" || $session_role=="teacher"){?>
                 <div class="col-lg-6 col-5 text-right">
                   <input type="submit" value="Upload" class="btn btn-md btn-neutral" />
                 </div>
-            <?}?>
+            <?php }?>
             
           </div>
           <!-- Card stats -->
@@ -102,19 +102,19 @@ if(isset($_FILES["fileToUpload"])){
                     <input type="file" name="fileToUpload" class="form-control" id="exampleFormControlInput1" placeholder="New Value" required>
                   </div>
                   
-                  <?echo $fileName_db?>
+                  <?php echo $fileName_db?>
            
             </div>
           </div>
         </div>
       </div>
       <!-- Footer -->
-      <?include_once("./phpParts/footer.php")?>
+      <?php include_once("./phpParts/footer.php")?>
     </div>
     </form>
   </div>
   <!-- Scripts -->
-  <?include_once("./phpParts/footer-scripts.php")?>
+  <?php include_once("./phpParts/footer-scripts.php")?>
   
 </body>
 

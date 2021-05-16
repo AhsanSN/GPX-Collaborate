@@ -27,7 +27,7 @@ if(isset($_POST['title'])){
     if(pathinfo($_FILES["files"]["name"][0],PATHINFO_EXTENSION) == trim("gpx")){
         
         //()
-      $fname = generateRandomString()."_merged.gpx";
+      $fname = generateRandomString().".gpx";
       $newGpxFileName = "./uploads/".$fname; 
       $gpxFileCreate = fopen($newGpxFileName,"w");
       $lastItemKey = count($_FILES);
@@ -85,8 +85,7 @@ if(isset($_POST['title'])){
     }
 
     if($gpxFileCreate && (pathinfo($_FILES["files"]["name"][0],PATHINFO_EXTENSION) == trim("gpx"))){
-        echo "merged created";
-        $myfiles = array($fname);
+        $myfiles = [$fname];
         fclose($gpxFileCreate);
     }else{
       
@@ -338,7 +337,7 @@ if(isset($_GET['delete-post'])){
 
         <form action="" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <input value="<?php echo $data['title']?>" type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
+            <input value="1" type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
           </div>
 
           <div class="form-group">
@@ -351,7 +350,7 @@ if(isset($_GET['delete-post'])){
 
 
           <div class="form-group">
-            <textarea value="" type="text" name="description" placeholder="Description"  class="form-control" id="exampleFormControlInput1"  required><?php echo $data['description']?></textarea>
+            <textarea value="" type="text" name="description" placeholder="Description"  class="form-control" id="exampleFormControlInput1"  required>2</textarea>
           </div>
 
           <div class="form-group">

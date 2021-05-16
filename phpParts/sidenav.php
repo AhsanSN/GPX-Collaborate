@@ -1,4 +1,4 @@
-<?
+<?php 
 $filenameLink = basename($_SERVER['PHP_SELF']);
 
 ?>
@@ -43,33 +43,47 @@ $filenameLink = basename($_SERVER['PHP_SELF']);
            
            
             <li class="nav-item">
-              <a class="nav-link <?if($filenameLink==''||$filenameLink=='home.php'){echo 'active';}?>" href="./home.php">
+              <a class="nav-link <?php if($filenameLink==''||$filenameLink=='home.php'){echo 'active';}?>" href="./home.php">
                 <span class="nav-link-text">Home</span>
               </a>
             </li>
+            <?php if(isset($session_id)){?>
             <li class="nav-item">
-              <a class="nav-link <?if($filenameLink=='newpost.php'){echo 'active';}?>" href="./newpost.php">
+              <a class="nav-link <?php if($filenameLink=='newpost.php'){echo 'active';}?>" href="./newpost.php">
                 <span class="nav-link-text">New Post</span>
               </a>
             </li>
-            
-            <?if($session_role=="admin"){?>
+            <?php }else{ ?>
             <li class="nav-item">
-              <a class="nav-link <?if($filenameLink=='users.php'){echo 'active';}?>" href="./users.php">
+              <a class="nav-link" href="./signup.php">
+                <span class="nav-link-text">Signup</span>
+              </a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" href="./login.php">
+                <span class="nav-link-text">Login</span>
+              </a>
+            </li>
+            <?php } ?>
+
+            
+            <?php if($session_role=="admin"){?>
+            <li class="nav-item">
+              <a class="nav-link <?php if($filenameLink=='users.php'){echo 'active';}?>" href="./users.php">
                 <span class="nav-link-text">Users</span>
               </a>
             </li>
-            <?}?>
-            <?if($session_role=="admin" || $session_role=="approver"){?>
+            <?php }?>
+            <?php if($session_role=="admin" || $session_role=="approver"){?>
             <li class="nav-item">
-              <a class="nav-link <?if($filenameLink=='posts.php'){echo 'active';}?>" href="./posts.php">
+              <a class="nav-link <?php if($filenameLink=='posts.php'){echo 'active';}?>" href="./posts.php">
                 <span class="nav-link-text">Posts</span>
               </a>
             </li>
-            <?}?>
+            <?php }?>
            
             <!--<li class="nav-item">-->
-            <!--  <a class="nav-link <?if($filenameLink=='settings.php'){echo 'active';}?>" href="./settings.php">-->
+            <!--  <a class="nav-link <?php if($filenameLink=='settings.php'){echo 'active';}?>" href="./settings.php">-->
             <!--    <span class="nav-link-text">Profile Settings</span>-->
             <!--  </a>-->
             <!--</li>-->

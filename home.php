@@ -1,29 +1,17 @@
-<?include_once("./global.php");
-
-if($logged==0){
-    ?>
-    <script type="text/javascript">
-            window.location = "./";
-        </script>
-    <?
-} 
-
-
-
-
+<?php include_once("./global.php");
 
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <?include_once("./phpParts/header.php")?>
+  <?php include_once("./phpParts/header.php")?>
   
 </head>
 
 <body>
   <!-- Sidenav -->
-  <?
+  <?php 
  
     include_once("./phpParts/sidenav.php");
 
@@ -31,7 +19,7 @@ if($logged==0){
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <?include_once("./phpParts/topnav.php")?>
+    <?php include_once("./phpParts/topnav.php")?>
     <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -49,11 +37,11 @@ if($logged==0){
             
           </div>
           
-            <?if(isset($_GET['m'])){?>
+            <?php if(isset($_GET['m'])){?>
               <div class="alert alert-warning" role="alert">
-                <strong><?echo $_GET['m'];?></strong>
+                <strong><?php echo $_GET['m'];?></strong>
             </div>
-            <?}?>
+            <?php }?>
           <div class="alert alert-info" role="alert">
                 <strong>Welcome to your account.</strong>
             </div>
@@ -67,10 +55,10 @@ if($logged==0){
     <div class="container-fluid mt--6">
         
     <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
        
        <div class="row">
-       <? $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve'"; 
+       <?php  $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve'"; 
         $result_quizQuestions = $con->query($query_quizQuestions);
         while($row = $result_quizQuestions->fetch_assoc()) 
         {
@@ -85,82 +73,32 @@ if($logged==0){
             }
         ?>
         
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                  <img class="card-img-top" src="<?echo $image?>" alt="<?echo $image?>">
+            <div class="col-md-3">
+                <div class="card" style="">
+                  <img class="card-img-top" src="<?php echo $image?>" alt="<?php echo $image?>">
                   <div class="card-body">
-                    <h5 class="card-title"><?echo $row['title']?></h5>
-                    <p class="card-text"><?echo $row['description']?></p>
-                    <a href="./post.php?id=<?echo $row['id']?>" class="btn btn-primary">View</a>
+                    <h5 class="card-title"><?php echo $row['title']?></h5>
+                    <p class="card-text"><?php echo $row['description']?></p>
+                    <a href="./post.php?id=<?php echo $row['id']?>" class="btn btn-primary">View</a>
                   </div>
                 </div>
             </div>
 
-         <?}?>
+         <?php }?>
         </div>
        
     </div>
-      <div class="col-md-3">
-          
-          
-          <div class="card">
-            <div class="card-header bg-transparent">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h5 class="h3 mb-0">Insert</h5>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-               
-                
-            <form action="" method="post" enctype="multipart/form-data">
-              <div class="form-group">
-                <input value="<?echo $title?>" type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Title" required>
-              </div>
-              
-              <div class="form-group">
-                <select required name="route" class=" form-control" >
-                    <?foreach($g_routes as $route){?>
-                        <option value="<?echo $route?>"><?echo $route?></option>
-                    <?}?>
-                    </select>
-              </div>
-              
-              
-              <div class="form-group">
-                <textarea value="" type="text" name="description" placeholder="Description"  class="form-control" id="exampleFormControlInput1"  required><?echo $description?></textarea>
-              </div>
-              
-             <div class="form-group">
-                <label for="exampleFormControlInput1">File</label>
-                <input type="file"  name="files[]" multiple  class="form-control" id="exampleFormControlInput1"  >
-              </div>
-              
-              
-              <div class="form-group">
-                  <button class="btn btn-primary btn-md btn-block" type="submit">Insert</button>
-              </div>
-              
-            </form>       
-           
 
-            </div>
-          </div>
-          
-          
-         </div>
-          
           
     </div>
 
     
       <!-- Footer -->
-      <?include_once("./phpParts/footer.php")?>
+      <?php include_once("./phpParts/footer.php")?>
     </div>
   </div>
   <!-- Scripts -->
-  <?include_once("./phpParts/footer-scripts.php")?>
+  <?php include_once("./phpParts/footer-scripts.php")?>
   
   
   

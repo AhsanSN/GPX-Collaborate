@@ -1,11 +1,11 @@
-<?include_once("./global.php");
+<?php include_once("./global.php");
 
 if($session_userId!="admin" && $session_userId!="approver"){
     ?>
     <script type="text/javascript">
             window.location = "./";
         </script>
-    <?
+    <?php 
 } 
 
 if(isset($_GET['change-status'])){
@@ -36,13 +36,13 @@ if(isset($_GET['delete-post'])){
 <html>
 
 <head>
-  <?include_once("./phpParts/header.php")?>
+  <?php include_once("./phpParts/header.php")?>
   
 </head>
 
 <body>
   <!-- Sidenav -->
-  <?
+  <?php 
  
     include_once("./phpParts/sidenav.php");
 
@@ -50,7 +50,7 @@ if(isset($_GET['delete-post'])){
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <?include_once("./phpParts/topnav.php")?>
+    <?php include_once("./phpParts/topnav.php")?>
     <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -70,11 +70,11 @@ if(isset($_GET['delete-post'])){
           </div>
           
         
-                  <?if(isset($_GET['delete-user'])){?>
+                  <?php if(isset($_GET['delete-user'])){?>
               <div class="alert alert-success" role="alert">
                 <strong>User deleted successfully</strong>
             </div>
-            <?}?>
+            <?php }?>
             
             
         </div>
@@ -111,7 +111,7 @@ if(isset($_GET['delete-post'])){
         </thead>
         <tbody>
             
-           <?     
+           <?php      
         
                 
            $query_quizQuestions= "select * from gpxCollaborate_posts"; 
@@ -127,17 +127,17 @@ if(isset($_GET['delete-post'])){
                 ?>
               <tr>
                 <td>
-                    <?echo $row['title']?>
+                    <?php echo $row['title']?>
                 </td>
                 
                 <td>
-                    <?echo $row['description']?>
+                    <?php echo $row['description']?>
                 </td>
                 <td>
-                    <?echo ucfirst($row['type'])?>
+                    <?php echo ucfirst($row['type'])?>
                 </td>
                 <td>
-                    <?echo ucfirst($row['status'])?>
+                    <?php echo ucfirst($row['status'])?>
                 </td>
                
                 
@@ -145,13 +145,13 @@ if(isset($_GET['delete-post'])){
                     <div class="media align-items-center">
                         <div class="media-body">
                             
-                            <a class="btn btn-primary btn-sm" href="./post.php?id=<?echo $row['id']?>">View</a>
+                            <a class="btn btn-primary btn-sm" href="./post.php?id=<?php echo $row['id']?>">View</a>
 
-                            <?if($row['status']=="new"){?>
-                                <a class="btn btn-success btn-sm" href="?change-status=<?echo $row['id']?>&role=approve">Approve</a>
-                                <a class="btn btn-warning btn-sm" href="?change-status=<?echo $row['id']?>&role=disapprove">Disapprove</a>
-                            <?}?>
-                            <a class="btn btn-danger btn-sm" href="?delete-post=<?echo $row['id']?>">Delete</a>
+                            <?php if($row['status']=="new"){?>
+                                <a class="btn btn-success btn-sm" href="?change-status=<?php echo $row['id']?>&role=approve">Approve</a>
+                                <a class="btn btn-warning btn-sm" href="?change-status=<?php echo $row['id']?>&role=disapprove">Disapprove</a>
+                            <?php }?>
+                            <a class="btn btn-danger btn-sm" href="?delete-post=<?php echo $row['id']?>">Delete</a>
 
                             
                           
@@ -161,7 +161,7 @@ if(isset($_GET['delete-post'])){
                 </td>
               
               </tr>
-              <?}
+              <?php }
               }?>
         </tbody>
       </table>
@@ -173,11 +173,11 @@ if(isset($_GET['delete-post'])){
 
     
       <!-- Footer -->
-      <?include_once("./phpParts/footer.php")?>
+      <?php include_once("./phpParts/footer.php")?>
     </div>
   </div>
   <!-- Scripts -->
-  <?include_once("./phpParts/footer-scripts.php")?>
+  <?php include_once("./phpParts/footer-scripts.php")?>
 
   
 </body>

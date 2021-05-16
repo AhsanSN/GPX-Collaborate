@@ -1,9 +1,9 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="<?echo $g_project_name?> - Leading the digital transformation">
+  <meta name="description" content="<?php echo $g_project_name?> - Leading the digital transformation">
   <meta name="author" content="Anomoz Softwares">
   
-  <title><?echo $g_project_name?></title>
+  <title><?php echo $g_project_name?></title>
   <!-- Favicon -->
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 

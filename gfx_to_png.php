@@ -1,4 +1,4 @@
-<?include_once("./global.php");
+<?php include_once("./global.php");
 $gpxfile = $_GET['filename'];
 
 ?>
@@ -26,7 +26,7 @@ html, body, #leaflet {
 		<script>
 		    var map = new L.Map('leaflet', {layers: [new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')]});
 
-            var gpx = './uploads/<?echo $gpxfile?>'; // URL to your GPX file or the GPX itself
+            var gpx = './uploads/<?php echo $gpxfile?>'; // URL to your GPX file or the GPX itself
             new L.GPX(gpx, {async: true}).on('loaded', function(e) {
             	map.fitBounds(e.target.getBounds());
             }).addTo(map);

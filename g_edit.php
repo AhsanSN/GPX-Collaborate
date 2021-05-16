@@ -1,4 +1,4 @@
-<?
+<?php 
 include_once("./global.php");
 
 $table = $_GET['t'];
@@ -27,9 +27,9 @@ if(isset($_POST['title'])){
         }else{
         ?>
         <script type="text/javascript">
-            window.location = "<?echo $callback;?>";
+            window.location = "<?php echo $callback;?>";
         </script>
-        <?
+        <?php 
     }
 }
 ?>
@@ -37,17 +37,17 @@ if(isset($_POST['title'])){
 <html>
 
 <head>
-  <?include_once("./phpParts/header.php")?>
+  <?php include_once("./phpParts/header.php")?>
 </head>
 
 <body>
    
   <!-- Sidenav -->
-  <?include_once("./phpParts/sidenav.php")?>
+  <?php include_once("./phpParts/sidenav.php")?>
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <?include_once("./phpParts/topnav.php")?>
+    <?php include_once("./phpParts/topnav.php")?>
     <!-- Header -->
     <!-- Header -->
     <form method="post" action="" enctype="multipart/form-data">
@@ -59,11 +59,11 @@ if(isset($_POST['title'])){
               <h6 class="h2 text-white d-inline-block mb-0">Edit Value</h6>
               
             </div>
-            <?if($session_role=="admin" || $session_role=="teacher"){?>
+            <?php if($session_role=="admin" || $session_role=="teacher"){?>
                 <div class="col-lg-6 col-5 text-right">
                   <input type="submit" value="Save" class="btn btn-md btn-neutral" />
                 </div>
-            <?}?>
+            <?php }?>
             
           </div>
           <!-- Card stats -->
@@ -84,7 +84,7 @@ if(isset($_POST['title'])){
             </div>
             <div class="card-body">
                 
-                    <?
+                    <?php 
                     $table = $_GET['t'];
                     $row = $_GET['r'];
                     $id = $_GET['i'];
@@ -105,7 +105,7 @@ if(isset($_POST['title'])){
                     //echo $value;
                     ?>
                   <div class="form-group">
-                    <textarea type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="New Value" required><?echo $value?></textarea>
+                    <textarea type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="New Value" required><?php echo $value?></textarea>
                   </div>
            
            <p>If the input is for uploading a file, upload your file <a target="_blank" href="./g_fileupload.php">here</a> and then paste the link here.</p>
@@ -114,12 +114,12 @@ if(isset($_POST['title'])){
         </div>
       </div>
       <!-- Footer -->
-      <?include_once("./phpParts/footer.php")?>
+      <?php include_once("./phpParts/footer.php")?>
     </div>
     </form>
   </div>
   <!-- Scripts -->
-  <?include_once("./phpParts/footer-scripts.php")?>
+  <?php include_once("./phpParts/footer-scripts.php")?>
   
 </body>
 
