@@ -407,3 +407,40 @@
 [16-May-2021 10:59:46 UTC] PHP Warning:  preg_replace(): Unknown modifier 'g' in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/test1.php on line 68
 [16-May-2021 11:00:12 UTC] PHP Warning:  preg_replace(): Unknown modifier 'g' in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/test1.php on line 68
 [16-May-2021 11:01:19 UTC] PHP Warning:  preg_replace(): Unknown modifier 'g' in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/test1.php on line 68
+[20-May-2021 15:25:09 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:25:09 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:25:09 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:25:32 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:25:32 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:25:32 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:25:34 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/post.php on line 26
+[20-May-2021 15:25:47 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:25:47 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:25:47 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:26:52 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:26:52 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:26:52 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:26:55 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:26:55 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:26:55 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:27:00 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/post.php on line 26
+[20-May-2021 15:27:05 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:27:05 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:27:05 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:27:13 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/post.php on line 26
+[20-May-2021 15:27:20 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:27:20 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:27:20 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:27:23 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/post.php on line 26
+[20-May-2021 15:27:56 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:27:56 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:28:13 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[20-May-2021 15:28:13 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[21-May-2021 13:45:43 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[21-May-2021 13:45:43 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[21-May-2021 13:46:01 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[21-May-2021 13:46:01 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[21-May-2021 13:46:37 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[21-May-2021 13:46:37 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89
+[21-May-2021 13:46:39 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/post.php on line 26
+[21-May-2021 13:51:21 UTC] PHP Warning:  Division by zero in /home2/anomozco/projects.anomoz.com/ke/gpxCollaborate/home.php on line 89

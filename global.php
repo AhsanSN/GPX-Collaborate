@@ -171,7 +171,7 @@ function uploadFile($file){
     }
 }
 
-$g_project_url = "https://projects.anomoz.com/gpxCollaborate/";
+$g_project_url = "https://projects.anomoz.com/ke/gpxCollaborate/";
 
 $g_project_name = "GPX Collaborate";
 $g_main_admin_id = "admin";
