@@ -21,12 +21,19 @@ $getComments = getAll($con,$comment_sql);
 $review_sql = "SELECT * FROM `gpxCollaborate_reviews` AS review JOIN `gpxCollaborate_users` AS user ON review.user_id = user.id WHERE `post_id` = '$id'";
 $getReviews = getAll($con,$review_sql);
 
+$review_sql = "SELECT round(avg(rate)) rate, round(avg(r.difficulty_rates)) difficulty_rates, round(avg(r.view_rates)) view_rates, round(avg(r.crowdesness_rates)) crowdesness_rates, round(avg(surface_rates)) surface_rates FROM gpxCollaborate_reviews AS r JOIN `gpxCollaborate_users` AS user ON r.user_id = user.id
+ WHERE `post_id` = '$id'";
+$avgReviews = getAll($con,$review_sql);
+
+
 $sumOfRating = array_sum(array_column($getReviews,'rate'));
 $totalRating = count($getReviews);
 $avg = (int)((($sumOfRating*5)/($totalRating*5))/2);
 
 $isUserPostReview = in_array($session_id,array_column($getReviews,'user_id'));
 /*end of get all comments*/
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,7 +75,7 @@ html, body, #leaflet {
               
             <div class="col-lg-6 col-7">
                 <h6 class="h2 text-white d-inline-block mb-0">
-                    <?php echo $postDeets['title']?>
+                    <?php echo $postDeets['title']?> - <?php echo ucfirst($postDeets['category'])?>
                 </h6>
                  
             </div>
@@ -91,9 +98,39 @@ html, body, #leaflet {
         
         <div class="card">
             <div class="card-header bg-transparent">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h5 class="h3 mb-0"><?php echo $postDeets['title']?></h5>
+              <div class=" align-items-center">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="h3 mb-0"><?php echo $postDeets['title']?></h5>
+                    </div>
+                    <div class="col-md-5">
+                        <a href="#ratings" class="btn btn-info btn-sm">Ratings</a>
+                        <a href="#comments" class="btn btn-info btn-sm">Comments</a>
+                        
+                        <?php $files = json_decode($postDeets['file'], true);
+                        $i = 0;
+                        foreach($files as $filen){
+                            $i+=1;
+                            $file = strtolower($filen);
+                            $ext = end(explode('.', $file));
+                            if($ext=="gpx"){
+                                $gpxFile = $filen;
+                                ?><a href="#leaflet" class="btn btn-info btn-sm">Map</a><?php 
+                            }else if(in_array($ext, array("png", "jpg", "jpeg"))){
+                                ?><a href="#image_<?echo $i?>" class="btn btn-info btn-sm">Image</a><?php 
+                            }else if(in_array($ext, array("mp4"))){
+                                ?>
+                                    <a href="#video_<?echo $i?>" class="btn btn-info btn-sm">Video</a>
+                                <?php 
+                            }
+                        ?>
+                            
+                        <?php }?>
+                
+                
+                    </div>
+                     <div class="col-md-1"><?echo $avg?> <div class="showstarrating d-inline float-right" style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></div>
+                  
                 </div>
               </div>
             </div>
@@ -101,17 +138,19 @@ html, body, #leaflet {
                 
                 
                 <?php $files = json_decode($postDeets['file'], true);
+                $i = 0;
                 foreach($files as $filen){
+                    $i+=1;
                     $file = strtolower($filen);
                     $ext = end(explode('.', $file));
                     if($ext=="gpx"){
                         $gpxFile = $filen;
                         ?><div id="leaflet" style="height:400px;"></div><?php 
                     }else if(in_array($ext, array("png", "jpg", "jpeg"))){
-                        ?><img src="./uploads/<?php echo $filen?>" style="width:100%;" ><?php 
+                        ?><img  id="image_<?echo $i?>" src="./uploads/<?php echo $filen?>" style="width:100%;" ><?php 
                     }else if(in_array($ext, array("mp4"))){
                         ?>
-                             <video width="320" height="240" controls>
+                             <video width="320" height="240" controls id="video_<?echo $i?>" >
                               <source src="./uploads/<?php echo $filen?>" type="video/mp4">
                             Your browser does not support the video tag.
                             </video> 
@@ -137,7 +176,7 @@ html, body, #leaflet {
       <div class="col-md-4">
           
           
-          <div class="card">
+          <div class="card" id="comments">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
@@ -179,7 +218,7 @@ html, body, #leaflet {
                 <?php
                 foreach($getComments as $comment){
                 ?>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="#none" class="list-group-item list-group-item-action">
                   <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1"><?php echo $comment['name']; ?></h5>
                     <small><?php echo date("d M",strtotime($comment['created_at'])); ?></small>
@@ -215,11 +254,11 @@ html, body, #leaflet {
             <div class="col-md-8 mb-3">
           
           
-          <div class="card">
+          <div class="card" id="ratings">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h5 class="h3 mb-0 d-inline float-left">Ratting and Reviews</h5>
+                  <h5 class="h3 mb-0 d-inline float-left">Rating and Reviews</h5>
                   <div class="showstarrating d-inline float-right" style="font-size: 1.2em;"  data-rating-value="<?php echo $avg; ?>" data-rating-readonly="true" data-rating-stars="5"></div>
                 </div>
               </div>
@@ -235,6 +274,92 @@ html, body, #leaflet {
                 </div>
               <?php } ?>
 
+              <h5>Average Ratings</h5>
+              <?$review = $avgReviews[0]?>
+              <a href="#none" class="list-group-item list-group-item-action bg-light-info">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Overall</h5>
+                  </div>
+                  <div class="ratelist" data-rating-stars="10" data-rating-value="<?php echo $review['rate']; ?>" data-rating-readonly="true"></div>
+                  <strong class="d-block mb-2"><?php echo $review['description']; ?></strong>
+                  <?php if(isset($review['difficulty_rates'])){ ?>
+                  <small class="d-block text-muted"><b>Difficulty Rates : </b><?php echo $review['difficulty_rates']; ?> <div class="showstarrating d-inline " style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></small>
+                  <?php }?>
+
+                  <?php if(isset($review['view_rates'])){ ?>
+                  <small class="d-block text-muted"><b>View Rates : </b><?php echo $review['view_rates']; ?> <div class="showstarrating d-inline " style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></small>
+                  <?php }?>
+
+                  <?php if(isset($review['crowdesness_rates'])){ ?>
+                  <small class="d-block text-muted"><b>Crowdesness Rates : </b><?php echo $review['crowdesness_rates']; ?> <div class="showstarrating d-inline " style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></small>
+                  <?php }?>
+
+                  <?php if(isset($review['surface_rates'])){ ?>
+                  <small class="d-block text-muted"><b>Surface Rates : </b><?php echo $review['surface_rates']; ?> <div class="showstarrating d-inline " style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></small>
+                  <?php }?>
+                  <!-- auth check for remove comment -->
+                 
+                  <!-- end auth check for remove comment -->
+                </a>
+                <br>
+                
+              <h5>All Ratings</h5>
+              <div class="list-group comment-box">
+                <!-- foreach of comments -->
+                <?php
+                foreach($getReviews as $review){
+                  $avgRate += $review['rate'];
+                ?>
+                <a href="#none" class="list-group-item list-group-item-action">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><?php echo ucfirst($review['name']); ?></h5>
+                    <small><?php echo date("d M",strtotime($review['created_at'])); ?></small>
+                  </div>
+                  <div class="ratelist" data-rating-stars="10" data-rating-value="<?php echo $review['rate']; ?>" data-rating-readonly="true"></div>
+                  <strong class="d-block mb-2"><?php echo $review['description']; ?></strong>
+                  <?php if(isset($review['difficulty_rates'])){ ?>
+                  <small class="d-block text-muted"><b>Difficulty Rates : </b><?php echo $review['difficulty_rates']; ?> <div class="showstarrating d-inline " style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></small>
+                  <?php }?>
+
+                  <?php if(isset($review['view_rates'])){ ?>
+                  <small class="d-block text-muted"><b>View Rates : </b><?php echo $review['view_rates']; ?> <div class="showstarrating d-inline " style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></small>
+                  <?php }?>
+
+                  <?php if(isset($review['crowdesness_rates'])){ ?>
+                  <small class="d-block text-muted"><b>Crowdesness Rates : </b><?php echo $review['crowdesness_rates']; ?> <div class="showstarrating d-inline " style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></small>
+                  <?php }?>
+
+                  <?php if(isset($review['surface_rates'])){ ?>
+                  <small class="d-block text-muted"><b>Surface Rates : </b><?php echo $review['surface_rates']; ?> <div class="showstarrating d-inline " style="font-size: 1.2em;"  data-rating-value="<?php echo 1; ?>" data-rating-readonly="true" data-rating-stars="1"></div></small>
+                  <?php }?>
+                  <!-- auth check for remove comment -->
+                  <?php
+                  if(($review['user_id'] == $_SESSION['userId']) || in_array($_SESSION['role'],['admin'])){
+                  ?>
+                  <div class="float-right">
+                    <form method="post" action="./include/models/review.php">
+                      <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
+                      <input type="hidden" name="DELETE_REVIEW" value="true">
+                      <input type="hidden" name="post_id" value="<?php echo $id;?>">
+                      <button class="btn btn-sm btn-outline-danger">REMOVE</button>
+                    </form>
+                  </div>
+                  <?php } ?>
+                  <!-- end auth check for remove comment -->
+                </a>
+                <?php }
+                ?>
+                <!-- end foreach of comments -->
+              </div>
+              
+              
+
+            </div>
+          </div>
+          
+          
+          <div class="card">
+              <div class="card-body">
               <?php if(isset($session_id) && !$isUserPostReview){ ?>
               <form method="post" action="./include/models/review.php">
                 <div class="row">
@@ -284,60 +409,8 @@ html, body, #leaflet {
                 </div>
               </form>
               <?php } ?>
-              
-              <div class="list-group comment-box">
-                <!-- foreach of comments -->
-                <?php
-                foreach($getReviews as $review){
-                  $avgRate += $review['rate'];
-                ?>
-                <a href="#" class="list-group-item list-group-item-action">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"><?php echo ucfirst($review['name']); ?></h5>
-                    <small><?php echo date("d M",strtotime($review['created_at'])); ?></small>
-                  </div>
-                  <div class="ratelist" data-rating-stars="10" data-rating-value="<?php echo $review['rate']; ?>" data-rating-readonly="true"></div>
-                  <strong class="d-block mb-2"><?php echo $review['description']; ?></strong>
-                  <?php if(isset($review['difficulty_rates'])){ ?>
-                  <small class="d-block text-muted"><b>Difficulty Rates : </b><?php echo $review['difficulty_rates']; ?></small>
-                  <?php }?>
-
-                  <?php if(isset($review['view_rates'])){ ?>
-                  <small class="d-block text-muted"><b>View Rates : </b><?php echo $review['view_rates']; ?></small>
-                  <?php }?>
-
-                  <?php if(isset($review['crowdesness_rates'])){ ?>
-                  <small class="d-block text-muted"><b>Crowdesness Rates : </b><?php echo $review['crowdesness_rates']; ?></small>
-                  <?php }?>
-
-                  <?php if(isset($review['surface_rates'])){ ?>
-                  <small class="d-block text-muted"><b>Surface Rates : </b><?php echo $review['surface_rates']; ?></small>
-                  <?php }?>
-                  <!-- auth check for remove comment -->
-                  <?php
-                  if(($review['user_id'] == $_SESSION['userId']) || in_array($_SESSION['role'],['admin'])){
-                  ?>
-                  <div class="float-right">
-                    <form method="post" action="./include/models/review.php">
-                      <input type="hidden" name="review_id" value="<?php echo $review['review_id']; ?>">
-                      <input type="hidden" name="DELETE_REVIEW" value="true">
-                      <input type="hidden" name="post_id" value="<?php echo $id;?>">
-                      <button class="btn btn-sm btn-outline-danger">REMOVE</button>
-                    </form>
-                  </div>
-                  <?php } ?>
-                  <!-- end auth check for remove comment -->
-                </a>
-                <?php }
-                ?>
-                <!-- end foreach of comments -->
-              </div>
-                
-
-
-            </div>
           </div>
-          
+          </div>
           
          </div>
     </div>      

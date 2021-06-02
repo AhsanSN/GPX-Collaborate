@@ -49,8 +49,13 @@ $filenameLink = basename($_SERVER['PHP_SELF']);
             </li>
             <?php if(isset($session_id)){?>
             <li class="nav-item">
-              <a class="nav-link <?php if($filenameLink=='newpost.php'){echo 'active';}?>" href="./newpost.php">
-                <span class="nav-link-text">New Post</span>
+              <a class="nav-link <?php if($filenameLink=='newpost.php' && $_GET['category']=="route"){echo 'active';}?>" href="./newpost.php?category=route">
+                <span class="nav-link-text">New Route</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if($filenameLink=='newpost.php' && $_GET['category']=="journey"){echo 'active';}?>" href="./newpost.php?category=journey">
+                <span class="nav-link-text">New Journey</span>
               </a>
             </li>
             <?php }else{ ?>

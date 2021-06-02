@@ -3,6 +3,11 @@ include_once("./global.php");
 include_once("./include/core/session.php");
 include_once("./include/core/dbmodel.php");
 
+if(!($_GET['category'])){
+    $_GET['category'] = "route";
+}
+$category = $_GET['category'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +37,7 @@ include_once("./include/core/dbmodel.php");
               
             <div class="col-lg-6 col-7">
                 <h6 class="h2 text-white d-inline-block mb-0">
-                    Home
+                    Home - <?echo ucfirst($category)?>s
                 </h6>
                  
             </div>
@@ -52,6 +57,14 @@ include_once("./include/core/dbmodel.php");
             <form method="get" action="./home.php">
               <div class="input-group mb-3">
                 <input type="text" name="search" class="form-control" placeholder="Search here...">
+                <div class="input-group-append">
+                    <select  name="route" class=" form-control" >
+                        <option value="">All</option>
+                      <?php foreach($g_routes as $route){?>
+                        <option value="<?php echo $route?>" ><?php echo $route?></option>
+                      <?php }?>
+                    </select>
+                </div>
                 <div class="input-group-append">
                   <button class="btn btn-white" type="submit">SEARCH</button>
                 </div>
@@ -73,9 +86,10 @@ include_once("./include/core/dbmodel.php");
        <?php  
         if(isset($_GET['search']) && !empty($_GET['search'])){
           $s = $_GET['search'];
-          $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve' AND title LIKE '%$s%'"; 
+          $route = $_GET['route'];
+          $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve' AND title LIKE '%$s%  AND route LIKE '%$route%' and category='$category'"; 
         }else{
-          $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve'"; 
+          $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve' and category='$category'"; 
         }
         $result_quizQuestions = $con->query($query_quizQuestions);
         while($row = $result_quizQuestions->fetch_assoc()) 

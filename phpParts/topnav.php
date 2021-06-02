@@ -7,23 +7,41 @@ $filenameLink = basename($_SERVER['PHP_SELF']);
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
-          <?php if($filenameLink=='home.php'){?>
-          <!--
-              <div class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-                <div class="form-group mb-0">
-                  <div class="input-group input-group-alternative input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-search"></i></span>
-                    </div>
-                    <input class="form-control" id="searchQuery" onkeyup="searchQuery()" placeholder="Search" type="text">
-                  </div>
-                </div>
-                <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
+          
+           <ul class="navbar-nav">
+            
+            <li class="nav-item d-xl-none">
+              <!-- Sidenav toggler -->
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main" style="height:50px;">
+                <a class="nav-link" >
+                <span class="nav-link-text">Close</span>
+              </a>
               </div>
-              -->
-          <?php }?>
+            </li>
+           
+           <!--
+            <li class="nav-item">
+              <a class="nav-link <?php if($filenameLink==''||$filenameLink=='home.php'){echo 'active';}?>" href="./home.php">
+                <span class="nav-link-text">Home</span>
+              </a>
+            </li>
+            -->
+            <li class="nav-item">
+              <a class="nav-link <?php if($filenameLink=='home.php' && $_GET['category']=="route"){echo 'active';}?>" href="./home.php?category=route">
+                <span class="nav-link-text">Routes</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if($filenameLink=='home.php' && $_GET['category']=="journey"){echo 'active';}?>" href="./home.php?category=journey">
+                <span class="nav-link-text">Journeys</span>
+              </a>
+            </li>
+          
+          
+            
+          </ul>
+          
+          
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
               

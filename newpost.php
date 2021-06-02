@@ -8,6 +8,12 @@ if($logged==0){
   <?php 
 } 
 
+if(!($_GET['category'])){
+    $_GET['category'] = "route";
+}
+$category = $_GET['category'];
+
+
 
 if(isset($_POST['title'])){
   $title = mb_htmlentities(($_POST['title']));
@@ -103,7 +109,7 @@ if(isset($_POST['title'])){
     $id = $_GET['id'];
     $sql="update gpxCollaborate_posts set title='$title', description='$description', timeAdded='$timeAdded', userId='$session_userId', type='$route' where id='$id'  ";
   }else{
-    $sql="insert into gpxCollaborate_posts set title='$title', description='$description', timeAdded='$timeAdded', userId='$session_userId', id='$id', status='new', type='$route' ";
+    $sql="insert into gpxCollaborate_posts set title='$title', description='$description', timeAdded='$timeAdded', userId='$session_userId', id='$id', status='new', type='$route', category='$category' ";
   }
     //echo $sql;
   if(!mysqli_query($con,$sql))
@@ -208,7 +214,7 @@ if(isset($_GET['delete-post'])){
 
             <div class="col-lg-6 col-7">
               <h6 class="h2 text-white d-inline-block mb-0">
-                Posts
+                <?echo ucfirst($category)?>s
               </h6>
 
             </div>
@@ -239,7 +245,7 @@ if(isset($_GET['delete-post'])){
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h5 class="h3 mb-0">Insert</h5>
+                  <h5 class="h3 mb-0">Insert <?echo ucfirst($category)?></h5>
                 </div>
               </div>
             </div>
@@ -262,7 +268,7 @@ if(isset($_GET['delete-post'])){
                    <?php      
 
 
-                   $query_quizQuestions= "select * from gpxCollaborate_posts where userId='$session_userId'"; 
+                   $query_quizQuestions= "select * from gpxCollaborate_posts where userId='$session_userId' and category='$category'"; 
                    $result_quizQuestions = $con->query($query_quizQuestions);
                    if ($result_quizQuestions->num_rows > 0)
                    { 
@@ -357,8 +363,8 @@ if(isset($_GET['delete-post'])){
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlInput1">File</label>
-            <input type="file"  name="files[]" multiple  class="form-control" id="exampleFormControlInput1"  >
+            <label for="exampleFormControlInput1">File <small><?if($category=="route"){echo "Select 1 file"; }else{echo  "Select multiple file" ;}?></small></label>
+            <input type="file"  name="files[]" <?if($category=="route"){}else{echo  "multiple" ;}?>  class="form-control" id="exampleFormControlInput1"  >
           </div>
 
 
