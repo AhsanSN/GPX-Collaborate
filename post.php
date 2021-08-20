@@ -53,6 +53,18 @@ html, body, #leaflet {
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.4.0/gpx.min.js"></script>
+		 <link rel="stylesheet" href="article-editor.min.css" />
+
+    <style>
+        img{
+            width:100%;
+        }
+       
+       .arx-editor [data-arx-type="column"]{
+           outline:0;
+       }
+   </style>
+    
 </head>
 
 <body>
@@ -92,20 +104,33 @@ html, body, #leaflet {
     <!-- Page content -->
     <div class="container-fluid mt--6">
         
+        
+
     <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         
         
-        <div class="card">
+        
+            
+            <div class="w3-bar w3-black mb-2">
+  <button class="w3-bar-item w3-button btn btn-info" onclick="openCity('view_post')">View Post</button>             
+  <button class="w3-bar-item w3-button btn btn-info" onclick="openCity('ratings')">Ratings</button>
+  <button class="w3-bar-item w3-button btn btn-info" onclick="openCity('comments')">Comments</button>
+  <button class="w3-bar-item w3-button btn btn-info" onclick="openCity('add_rating')">Add Rating</button>
+</div>
+
+<div id="view_post" class="w3-container city" >
+
+          <div class="card">
             <div class="card-header bg-transparent">
               <div class=" align-items-center">
+                  
                 <div class="row">
+                    
                     <div class="col-md-6">
                         <h5 class="h3 mb-0"><?php echo $postDeets['title']?></h5>
                     </div>
                     <div class="col-md-5">
-                        <a href="#ratings" class="btn btn-info btn-sm">Ratings</a>
-                        <a href="#comments" class="btn btn-info btn-sm">Comments</a>
                         
                         <?php $files = json_decode($postDeets['file'], true);
                         $i = 0;
@@ -117,10 +142,12 @@ html, body, #leaflet {
                                 $gpxFile = $filen;
                                 ?><a href="#leaflet" class="btn btn-info btn-sm">Map</a><?php 
                             }else if(in_array($ext, array("png", "jpg", "jpeg"))){
-                                ?><a href="#image_<?echo $i?>" class="btn btn-info btn-sm">Image</a><?php 
+                                ?>
+                                <!--<a href="#image_<?echo $i?>" class="btn btn-info btn-sm">Image</a>-->
+                                <?php 
                             }else if(in_array($ext, array("mp4"))){
                                 ?>
-                                    <a href="#video_<?echo $i?>" class="btn btn-info btn-sm">Video</a>
+                                    <!--<a href="#video_<?echo $i?>" class="btn btn-info btn-sm">Video</a>-->
                                 <?php 
                             }
                         ?>
@@ -136,6 +163,9 @@ html, body, #leaflet {
             </div>
             <div class="card-body" style="a:1000px;">
                 
+                <?if($postDeets['image']!=""){?>
+                    <img src="./uploads/<?php echo $postDeets['image']?>">
+                <?}?>
                 
                 <?php $files = json_decode($postDeets['file'], true);
                 $i = 0;
@@ -160,7 +190,7 @@ html, body, #leaflet {
                     
                 <?php }?>
                 
-                <p><?php echo $postDeets['description']?></p>
+                <div class="arx-content"><?php echo $postDeets['description']?></div>
                
 
 
@@ -172,89 +202,10 @@ html, body, #leaflet {
             </div>
             <?}?>
           
-    </div>
-      <div class="col-md-4">
-          
-          
-          <div class="card" id="comments">
-            <div class="card-header bg-transparent">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h5 class="h3 mb-0">Comment Section</h5>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <?php 
-              if(getFlash("error")){
-                ?>
-                <div class="alert <?php echo getFlashType("error"); ?> alert-bold alert-dismissible fade show" role="alert">
-                  <span class="alert-text">
-                    <?php echo getFlash("error"); removeFlash("error"); ?>
-                  </span>
-                </div>
-              <?php } ?>
-              
-              
+</div>
 
-
-              <?php if(isset($session_id)){ ?>
-              <form method="post" action="./include/models/comment.php">
-                <div class="input-group mb-3">
-                  <input type="text" name="body" class="form-control" placeholder="Comment...">
-                  <input type="hidden" name="CREATE_COMMENT" value="true">
-                  <input type="hidden" name="post_id" value="<?php echo $id;?>">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">
-                      <i class="ni ni-send"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-              <?php } ?>
-              
-              <div class="list-group comment-box">
-                <!-- foreach of comments -->
-                <?php
-                foreach($getComments as $comment){
-                ?>
-                <a href="#none" class="list-group-item list-group-item-action">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"><?php echo $comment['name']; ?></h5>
-                    <small><?php echo date("d M",strtotime($comment['created_at'])); ?></small>
-                  </div>
-                  <small><?php echo $comment['body']; ?></small>
-                  <!-- auth check for remove comment -->
-                  <?php
-                  if(($comment['user_id'] == $_SESSION['userId']) || in_array($_SESSION['role'],['admin','approver'])){
-                  ?>
-                  <div class="float-right">
-                    <form method="post" action="./include/models/comment.php">
-                      <input type="hidden" name="comment_id" value="<?php echo $comment['comment_id']; ?>">
-                      <input type="hidden" name="DELETE_COMMENT" value="true">
-                      <input type="hidden" name="post_id" value="<?php echo $id;?>">
-                      <button class="btn btn-sm btn-outline-danger">REMOVE</button>
-                    </form>
-                  </div>
-                  <?php } ?>
-                  <!-- end auth check for remove comment -->
-                </a>
-                <?php } ?>
-                <!-- end foreach of comments -->
-              </div>
-                
-
-
-            </div>
-          </div>
-          
-          
-         </div>
-          
-            <div class="col-md-8 mb-3">
-          
-          
-          <div class="card" id="ratings">
+<div id="ratings" class="w3-container city"  style="display:none">
+  <div class="card" id="ratings">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
@@ -358,7 +309,18 @@ html, body, #leaflet {
           </div>
           
           
-          <div class="card">
+          
+</div>
+
+<div id="add_rating" class="w3-container city"  style="display:none">
+  <div class="card">
+      <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h5 class="h3 mb-0">Add Rating</h5>
+                </div>
+              </div>
+            </div>
               <div class="card-body">
               <?php if(isset($session_id) && !$isUserPostReview){ ?>
               <form method="post" action="./include/models/review.php">
@@ -408,11 +370,96 @@ html, body, #leaflet {
                   </button>
                 </div>
               </form>
-              <?php } ?>
+              <?php } if($isUserPostReview){ ?>
+              <p>Rating already Added</p>
+              <?}?>
           </div>
+          </div>
+</div>
+
+<div id="comments" class="w3-container city" style="display:none">
+  
+  
+  <div class="card" id="comments">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h5 class="h3 mb-0">Comment Section</h5>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <?php 
+              if(getFlash("error")){
+                ?>
+                <div class="alert <?php echo getFlashType("error"); ?> alert-bold alert-dismissible fade show" role="alert">
+                  <span class="alert-text">
+                    <?php echo getFlash("error"); removeFlash("error"); ?>
+                  </span>
+                </div>
+              <?php } ?>
+              
+              
+
+
+              <?php if(isset($session_id)){ ?>
+              <form method="post" action="./include/models/comment.php">
+                <div class="input-group mb-3">
+                  <input type="text" name="body" class="form-control" placeholder="Comment...">
+                  <input type="hidden" name="CREATE_COMMENT" value="true">
+                  <input type="hidden" name="post_id" value="<?php echo $id;?>">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">
+                      <i class="ni ni-send"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <?php } ?>
+              
+              <div class="list-group comment-box">
+                <!-- foreach of comments -->
+                <?php
+                foreach($getComments as $comment){
+                ?>
+                <a href="#none" class="list-group-item list-group-item-action">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><?php echo $comment['name']; ?></h5>
+                    <small><?php echo date("d M",strtotime($comment['created_at'])); ?></small>
+                  </div>
+                  <small><?php echo $comment['body']; ?></small>
+                  <!-- auth check for remove comment -->
+                  <?php
+                  if(($comment['user_id'] == $_SESSION['userId']) || in_array($_SESSION['role'],['admin','approver'])){
+                  ?>
+                  <div class="float-right">
+                    <form method="post" action="./include/models/comment.php">
+                      <input type="hidden" name="comment_id" value="<?php echo $comment['comment_id']; ?>">
+                      <input type="hidden" name="DELETE_COMMENT" value="true">
+                      <input type="hidden" name="post_id" value="<?php echo $id;?>">
+                      <button class="btn btn-sm btn-outline-danger">REMOVE</button>
+                    </form>
+                  </div>
+                  <?php } ?>
+                  <!-- end auth check for remove comment -->
+                </a>
+                <?php } ?>
+                <!-- end foreach of comments -->
+              </div>
+                
+
+
+            </div>
           </div>
           
-         </div>
+          
+  
+</div>
+
+
+          
+    </div>
+      
     </div>      
     </div>
 
@@ -455,6 +502,18 @@ html, body, #leaflet {
         });
       });
     </script>
+    
+    
+    <script>
+function openCity(cityName) {
+  var i;
+  var x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  document.getElementById(cityName).style.display = "block";  
+}
+</script>
 </body>
 
 </html>

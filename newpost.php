@@ -29,7 +29,7 @@ if(isset($_POST['title'])){
     $myfiles = array();
     $extension=array("jpeg","jpg","png","gif");
 
-    /*code by keyur*/
+    /*code by ahsan*/
     if(pathinfo($_FILES["files"]["name"][0],PATHINFO_EXTENSION) == trim("gpx")){
         
         //()
@@ -38,7 +38,7 @@ if(isset($_POST['title'])){
       $gpxFileCreate = fopen($newGpxFileName,"w");
       $lastItemKey = count($_FILES);
     }
-    /*end code by keyur*/
+    /*end code by ahsan*/
     foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name) {
       $txtGalleryName = generateRandomString();
       $file_name=$_FILES["files"]["name"][$key];
@@ -62,7 +62,6 @@ if(isset($_POST['title'])){
         }
         
         
-        /*code by keyur*/
         if(pathinfo($_FILES["files"]["name"][0],PATHINFO_EXTENSION) == trim("gpx")){
           $fcontent = file_get_contents("./uploads/".$newFileName);
           
@@ -84,7 +83,7 @@ if(isset($_POST['title'])){
           fwrite($gpxFileCreate,$fcontent);
           fwrite($gpxFileCreate,"<!-- $newFileName comment -->");
         }
-        /*end code by keyur*/
+        /*end code by ahsan*/
         array_push($myfiles, $newFileName);
       }
       
@@ -191,6 +190,9 @@ if(isset($_GET['delete-post'])){
 
 <head>
   <?php include_once("./phpParts/header.php")?>
+  <link rel="stylesheet" href="article-editor.min.css" />
+
+    
   
 </head>
 
@@ -239,7 +241,8 @@ if(isset($_GET['delete-post'])){
     <div class="container-fluid mt--6">
 
       <div class="row">
-        <div class="col-md-8">
+          <?if(!isset($_GET['id']) && !isset($_GET['new'])){?>
+        <div class="col-md-12">
 
           <div class="card">
             <div class="card-header bg-transparent">
@@ -247,6 +250,7 @@ if(isset($_GET['delete-post'])){
                 <div class="col">
                   <h5 class="h3 mb-0">Insert <?echo ucfirst($category)?></h5>
                 </div>
+                <a href="?category=<?echo $category?>&new=1" class="btn btn-primary">New Post</a>
               </div>
             </div>
             <div class="card-body">
@@ -257,7 +261,7 @@ if(isset($_GET['delete-post'])){
                   <thead class="thead-light">
                     <tr>
                       <th scope="col">Title</th>
-                      <th scope="col">Description</th>
+                      <!--<th scope="col">Description</th>-->
                       <th scope="col">Type</th>
                       <th scope="col">Status</th>
                       <th scope="col">Action</th>
@@ -284,9 +288,9 @@ if(isset($_GET['delete-post'])){
                           <?php echo $row['title']?>
                         </td>
 
-                        <td>
-                          <?php echo $row['description']?>
-                        </td>
+                        <!--<td>-->
+                        <!--  <?php//echo $row['description']?>-->
+                        <!--</td>-->
                         <td>
                           <?php echo ucfirst($row['type'])?>
                         </td>
@@ -321,14 +325,16 @@ if(isset($_GET['delete-post'])){
 
 
     </div>
-    <div class="col-md-4">
+    <?}?>
+    <?if(isset($_GET['id']) || isset($_GET['new'])){?>
+    <div class="col-md-12">
 
 
       <div class="card">
         <div class="card-header bg-transparent">
           <div class="row align-items-center">
             <div class="col">
-              <h5 class="h3 mb-0">Insert / Update</h5>
+              <h5 class="h3 mb-0">Insert / Update Post</h5>
             </div>
           </div>
         </div>
@@ -359,12 +365,13 @@ if(isset($_GET['delete-post'])){
 
 
           <div class="form-group">
+             <p>Whats on your mind? Add images, text, videos, headings, quotes, tables, and much more!</p>
             <textarea value="" type="text" name="description" placeholder="Description"  class="form-control" id="exampleFormControlInput1"  required><?php echo $data['description']?></textarea>
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlInput1">File <small><?if($category=="route"){echo "Select 1 file"; }else{echo  "Select multiple file" ;}?></small></label>
-            <input type="file"  name="files[]" <?if($category=="route"){}else{echo  "multiple" ;}?>  class="form-control" id="exampleFormControlInput1"  >
+            <label for="exampleFormControlInput1">File <small><?if($category=="route"){echo "Select 1 GPX file"; }else{echo  "Select multiple GPX file" ;}?></small></label>
+            <input type="file" accept=".gpx" name="files[]" <?if($category=="route"){}else{echo  "multiple" ;}?>  class="form-control" id="exampleFormControlInput1"  >
           </div>
 
 
@@ -380,6 +387,7 @@ if(isset($_GET['delete-post'])){
 
 
   </div>
+  <?}?>
 
 
 </div>
@@ -393,7 +401,17 @@ if(isset($_GET['delete-post'])){
 <?php include_once("./phpParts/footer-scripts.php")?>
 
 
+ <script src="article-editor.min.js"></script>
 
+<!-- call -->
+<script>
+ArticleEditor('textarea',
+{
+    image: {
+        upload: './image-upload.php'
+    }
+});
+</script>
 </body>
 
 </html>

@@ -8,6 +8,44 @@ if($session_userId!="admin" && $session_userId!="approver"){
     <?php 
 } 
 
+if(isset($_FILES["files"])){
+
+        //echo "asd";
+        $id = $_GET['upload-image'];
+    $myfiles = array();
+    $extension=array("jpeg","jpg","png","gif");
+
+
+    foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name) {
+      $txtGalleryName = generateRandomString();
+      $file_name=$_FILES["files"]["name"][$key];
+      $file_tmp=$_FILES["files"]["tmp_name"][$key];
+      $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+    
+    
+      if(true) {
+        $filename=basename($file_name,$ext);
+      $newFileName=$filename.time().".".$ext;
+      move_uploaded_file($file_tmp=$_FILES["files"]["tmp_name"][$key],"./uploads/".$newFileName);
+
+        
+        
+        $sql="update gpxCollaborate_posts set image='$newFileName' where id='$id'";
+        if(!mysqli_query($con,$sql))
+        {
+            echo "err";
+        }
+        
+        
+      }
+      
+    }
+
+    header("Location: ./posts.php");
+ }
+
+
+
 if(isset($_GET['change-status'])){
     $id = $_GET['change-status'];
     $role = $_GET['role'];
@@ -84,6 +122,7 @@ if(isset($_GET['delete-post'])){
     <div class="container-fluid mt--6">
         
     <div class="row">
+        <?if(!isset($_GET['upload-image'])){?>
   <div class="col-md-12">
       
       <div class="card" style="margin-top:50px;">
@@ -103,7 +142,7 @@ if(isset($_GET['delete-post'])){
         <thead class="thead-light">
           <tr>
             <th scope="col">Title</th>
-            <th scope="col">Description</th>
+            <th scope="col">Image</th>
             <th scope="col">Type</th>
              <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -122,7 +161,16 @@ if(isset($_GET['delete-post'])){
                     while($row = $result_quizQuestions->fetch_assoc()) 
                     { 
                         
-                        
+                        $files = json_decode($row['file'], true);
+                        $i = 0;
+                        foreach($files as $filen){
+                            $i+=1;
+                            $file = strtolower($filen);
+                            $ext = end(explode('.', $file));
+                            if($ext=="gpx"){
+                                $gpxFile = $filen;
+                            }
+                        }
                         
                 ?>
               <tr>
@@ -131,7 +179,13 @@ if(isset($_GET['delete-post'])){
                 </td>
                 
                 <td>
-                    <?php echo $row['description']?>
+                    <?if($row['image']!=""){?>
+                    <img src="./uploads/<?php echo $row['image']?>" style="width: 100px;">
+                    <?}else{?>
+                    
+                    <?}?><br>
+                    <a href="?upload-image=<?echo $row['id']?>" class="btn btn-sm btn-warning">Upload Image</a>
+                    <a href="<?echo $g_project_url?>embed.php?f=<?echo $gpxFile?>" target="_blank"  class="btn btn-sm btn-info">View Map</a>
                 </td>
                 <td>
                     <?php echo ucfirst($row['type'])?>
@@ -169,6 +223,45 @@ if(isset($_GET['delete-post'])){
   </div>
   
   </div>
+  <?}?>
+  
+  <?if(isset($_GET['id']) || isset($_GET['upload-image'])){?>
+    <div class="col-md-12">
+
+
+      <div class="card">
+        <div class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h5 class="h3 mb-0">Upload Image</h5>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+
+        <form action="" method="post" enctype="multipart/form-data">
+          
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Upload Image File <small></label>
+            <input type="file" accept=".png,.jpg,.jpeg" name="files[]" class="form-control" id="exampleFormControlInput1"  >
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary btn-md btn-block" type="submit">Submit</button>
+          </div>
+
+        </form>       
+
+
+      </div>
+    </div>
+
+
+  </div>
+  <?}?>
+  
+  
 </div>
 
     

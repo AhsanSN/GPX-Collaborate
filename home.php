@@ -84,13 +84,18 @@ $category = $_GET['category'];
        
        <div class="row">
        <?php  
-        if(isset($_GET['search']) && !empty($_GET['search'])){
-          $s = $_GET['search'];
-          $route = $_GET['route'];
-          $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve' AND title LIKE '%$s%  AND route LIKE '%$route%' and category='$category'"; 
+        if(isset($_GET['search'])){
+          
         }else{
-          $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve' and category='$category'"; 
+        //   $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve' and category='$category'"; 
         }
+        
+        $s = $_GET['search'];
+      $route = $_GET['route'];
+      $query_quizQuestions= "select * from gpxCollaborate_posts where status='approve' AND title LIKE '%$s%'  AND type LIKE '%$route%' and category='$category'"; 
+          
+          
+        // echo $query_quizQuestions;
         $result_quizQuestions = $con->query($query_quizQuestions);
         while($row = $result_quizQuestions->fetch_assoc()) 
         {
@@ -115,10 +120,10 @@ $category = $_GET['category'];
         
             <div class="col-md-3">
                 <div class="card" style="">
-                  <img class="card-img-top" src="<?php echo $image?>" alt="<?php echo $image?>">
+                  <img class="card-img-top" src="./uploads/<?php echo $row['image']?>" alt="<?php echo $row['image']?>">
                   <div class="card-body">
                     <h5 class="card-title"><?php echo $row['title']?></h5>
-                    <p class="card-text"><?php echo $row['description']?></p>
+                    <p class="card-text"><?php  //echo $row['description']?></p>
 
                     <?php if($avg != null){ ?>
                     <div class="d-inline float-right mt-2" style="font-size: 1.2em;"  data-rating-value="<?php echo $avg; ?>" data-rating-readonly="true" data-rating-stars="5"></div>
